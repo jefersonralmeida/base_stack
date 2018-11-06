@@ -17,8 +17,8 @@ To use the env, follow those steps:
 * To bring the API up, run the commands:
   * `docker-compose build`
   * `docker-compose run api "cp .env.example .env"`
-  * `docker-compose run api "composer install"
-  * `docker-compose run api "php artisan migrate --seed"
+  * `docker-compose run api "composer install"`
+  * `docker-compose run api "php artisan migrate --seed"`
   * `docker-compose up -d`
 * To start the SPA, inside the spa folder, run the commands:
   * `yarn install`
