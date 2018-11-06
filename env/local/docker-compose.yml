@@ -1,0 +1,57 @@
+version: '3'
+services:
+
+  # Nginx server that proxies all http requests
+  web:
+    build:
+      context: services/web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./services/web/conf/nginx.conf:/etc/nginx/conf.d/default.conf
+#      - ./services/web/conf/snippets/self-signed.conf:/etc/nginx/snippets/self-signed.conf
+#      - ./services/web/conf/snippets/ssl-params.conf:/etc/nginx/snippets/ssl-params.conf
+#      - ./services/web/ssl/certs/dhparam.pem:/etc/ssl/certs/dhparam.pem
+#      - ../appointments:/var/www/api
+#      - ./services/ssl/server.crt:/etc/ssl/certs/server.crt
+#      - ./services/ssl/server.key:/etc/ssl/private/server.key
+
+  api:
+    build:
+      context: services/api
+    volumes:
+      - ../../api:/var/www/api
+    depends_on:
+      - postgres
+
+  # Laravel Echo - Socket.io
+  realtime:
+    build: services/realtime
+    volumes:
+      - ../../api/laravel-echo-server.json:/realtime/laravel-echo-server.json
+    entrypoint: "laravel-echo-server start"
+    ports:
+      - 6001:6001
+
+  # Postgres Database
+  postgres:
+    build:
+      context: services/postgres
+    command: postgres -c logging_collector=on -c log_destination=stderr -c log_directory=/var/log/postgres -c config_file=/etc/postgres/postgresql.conf
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./services/postgres/logs:/var/log/postgres
+      - ./services/postgres/config:/etc/postgres
+    ports:
+      - 5432:5432
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+
+volumes:
+  db_data:

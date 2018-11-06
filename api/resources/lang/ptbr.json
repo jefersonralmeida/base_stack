@@ -1,0 +1,15 @@
+{
+  "Whoops!": "Ops!",
+  "Hello!": "Olá!",
+  "Regards": "Grato",
+  "Team": "Equipe",
+  "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser: :actionUrl":
+    "Se não conseguir clicar no botão \":actionText\", copie e cole a URL abaixo\nno seu navegador: :actionUrl",
+  "Confirm your account": "Confirme seu email",
+  "Thanks for signup! Please before you begin, you must confirm your account.":
+    "Seja bem vindo! Antes de começar a usar o sistema, precisamos confirmar seu email.",
+  "Confirm Account": "Confirmar Email",
+  "Thank you for using our application!": "Agradecemos por usar nosso sistema!",
+  "This activation token is invalid.": "O link de ativação é inválido.",
+  "Your account has been successfully activated": "Seu email foi ativado com sucesso"
+}
